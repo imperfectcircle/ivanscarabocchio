@@ -1,0 +1,170 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/* Font self-hosted generati dal plugin Vite (direttiva @fonts) */
+@theme inline {
+    --font-hand: var(--font-caveat);
+    --font-serif: var(--font-literata);
+}
+
+/* Palette "taccuino scarabocchiato" */
+@theme {
+    --color-carta: #f8f2e4;
+    --color-carta-scura: #efe4c8;
+    --color-foglio: #fffdf6;
+    --color-inchiostro: #1d2440;
+    --color-biro: #2647a6;
+    --color-matita: #4f4e63;
+    --color-pennarello: #b8322a;
+    --color-riga: #cfdaf0;
+    --color-margine: #e7a9a4;
+    --color-postit-giallo: #ffe27a;
+    --color-postit-rosa: #ffc6d3;
+    --color-postit-verde: #c8ecb4;
+    --color-postit-azzurro: #c2e3f5;
+
+    --animate-disegna: disegna 1.2s ease-out 0.3s both;
+
+    @keyframes disegna {
+        from {
+            stroke-dashoffset: 1;
+        }
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background-color: var(--color-carta);
+        color: var(--color-inchiostro);
+        font-family: var(--font-serif);
+    }
+
+    :focus-visible {
+        outline: 3px solid var(--color-biro);
+        outline-offset: 3px;
+        border-radius: 4px;
+    }
+
+    ::selection {
+        background-color: var(--color-postit-giallo);
+    }
+}
+
+/* Bordo irregolare "disegnato a mano" */
+@utility bordo-mano {
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+/* Foglio a righe con il margine rosso */
+@utility carta-righe {
+    background-color: var(--color-foglio);
+    background-image:
+        linear-gradient(
+            90deg,
+            transparent 2.25rem,
+            var(--color-margine) 2.25rem,
+            var(--color-margine) calc(2.25rem + 2px),
+            transparent calc(2.25rem + 2px)
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(2rem - 1px),
+            var(--color-riga) calc(2rem - 1px),
+            var(--color-riga) 2rem
+        );
+}
+
+/* Striscia di nastro adesivo in alto */
+@utility nastro {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -0.9rem;
+        left: 50%;
+        width: 7rem;
+        height: 1.9rem;
+        translate: -50% 0;
+        rotate: -4deg;
+        background-color: rgb(255 255 255 / 0.6);
+        border: 1px solid rgb(29 36 64 / 0.08);
+        box-shadow: 0 1px 3px rgb(29 36 64 / 0.12);
+        z-index: 1;
+    }
+}
+
+/* Link sottolineato a mano (onda) */
+@utility link-scarabocchio {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--color-pennarello);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    transition: color 150ms;
+
+    &:hover {
+        color: var(--color-biro);
+    }
+}
+
+/* Pulsante "adesivo" */
+@utility bottone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.35rem 1.4rem;
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--color-inchiostro);
+    border: 2px solid var(--color-inchiostro);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    box-shadow: 3px 3px 0 var(--color-inchiostro);
+    transition:
+        translate 150ms,
+        rotate 150ms,
+        box-shadow 150ms;
+
+    &:hover {
+        translate: 0 -2px;
+        rotate: -1deg;
+        box-shadow: 5px 5px 0 var(--color-inchiostro);
+    }
+
+    &:active {
+        translate: 1px 1px;
+        box-shadow: 1px 1px 0 var(--color-inchiostro);
+    }
+}
+
+/* Tratto SVG che si "disegna" */
+@utility tratto-animato {
+    & path {
+        stroke-dasharray: 1;
+        stroke-dashoffset: 0;
+        animation: var(--animate-disegna);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
