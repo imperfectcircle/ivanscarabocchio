@@ -5,6 +5,7 @@ Questo file contiene le regole e il contesto che Claude Code deve sempre rispett
 ## 1. Panoramica del progetto
 
 - **Scopo**: sito vetrina per l'autore Ivan Scarabocchio, che ha pubblicato il suo primo libro con una piccola casa editrice indipendente e alcuni racconti brevi. Il sito deve essere pronto ad accogliere **libri futuri** (mai dare per scontato che esista un solo libro).
+- **Primo libro**: *Gli ultimi giorni del trio Meraviglia*, edizioni **Edikit**. Copertina (`public/images/copertina.webp`, 1148×1600) e foto dell'autore (`public/images/autore.webp`, 1024×818) sono materiali reali, da usare anche come dati iniziali quando ci sarà la gestione dei contenuti. Anno 2026, 236 pagine. Trama (dal sito dell'editore): «Incastrato nelle lamiere, Musone è l'unico sopravvissuto del "Trio Meraviglia". Con le gambe spezzate, braccato da belve feroci e vegliato dai cadaveri dei compagni, inizia una disperata e cruda lotta per restare in vita. Un viaggio viscerale e spietato ai limiti estremi della natura umana. Fino a che punto si può spingere un uomo prima di perdere il senno?». ISBN e link di acquisto sono ancora da ricevere.
 - **Tono**: accattivante, giocoso, informale, non istituzionale; navigazione semplice e immediata. Identità grafica: vedi sezione 14.
 - **Lingua**: solo italiano (URL e slug in italiano).
 - **I libri non vengono venduti sul sito**: ogni libro ha N link di acquisto esterni (casa editrice, Amazon, altri store), gestiti dal pannello.

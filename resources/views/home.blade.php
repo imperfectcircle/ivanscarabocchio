@@ -1,4 +1,4 @@
-{{-- Anteprima statica: tutti i contenuti e le immagini sono segnaposto, da sostituire con i dati gestiti dal pannello. --}}
+{{-- Anteprima statica: foto dell'autore e copertina sono reali; gli altri testi e immagini sono segnaposto, da sostituire con i dati gestiti dal pannello. --}}
 <x-layouts.public>
     {{-- Benvenuto --}}
     <section aria-labelledby="titolo-benvenuto" class="relative">
@@ -27,12 +27,12 @@
                 </div>
             </div>
 
-            <div class="relative mx-auto w-full max-w-sm">
+            <div class="relative mx-auto w-full max-w-md">
                 <figure class="nastro bg-foglio rotate-3 p-3 pb-4 shadow-[4px_14px_24px_-10px_rgb(29_36_64/0.45)]">
-                    <img src="{{ asset('images/segnaposto/autore.webp') }}" alt="Ritratto di Ivan Scarabocchio"
-                        width="900" height="1100" class="aspect-9/11 w-full object-cover grayscale-30"
-                        fetchpriority="high">
-                    <figcaption class="font-hand mt-3 text-center text-2xl">io, con la faccia da scrittore</figcaption>
+                    <img src="{{ asset('images/autore.webp') }}"
+                        alt="Ivan Scarabocchio con in braccio un gatto rosso che fa l'occhiolino" width="1024"
+                        height="818" class="w-full object-cover" fetchpriority="high">
+                    <figcaption class="font-hand mt-3 text-center text-2xl">io e il mio editor (quello peloso)</figcaption>
                 </figure>
 
                 <x-post-it color="rosa"
@@ -55,21 +55,11 @@
         </svg>
 
         <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-[1fr_1.3fr] md:py-24">
-            {{-- Copertina segnaposto --}}
-            <div class="mx-auto w-full max-w-xs -rotate-2 md:max-w-60 lg:max-w-xs transition-transform duration-300 hover:rotate-0">
-                <div
-                    class="relative aspect-2/3 overflow-hidden rounded-r-md shadow-[10px_18px_30px_-12px_rgb(29_36_64/0.6)]">
-                    <img src="{{ asset('images/segnaposto/copertina-sfondo.webp') }}"
-                        alt="Copertina del libro “Le cose che restano a galla”" width="700" height="1000"
-                        class="absolute inset-0 h-full w-full object-cover" loading="lazy">
-                    <div aria-hidden="true"
-                        class="absolute inset-0 flex flex-col justify-between bg-linear-to-b from-black/40 via-transparent to-black/60 p-6 text-white">
-                        <p class="text-sm tracking-[0.3em] uppercase">Ivan Scarabocchio</p>
-                        <div>
-                            <p class="font-hand text-5xl leading-none">Le cose che restano a galla</p>
-                            <p class="mt-3 text-xs tracking-widest uppercase">Casa Editrice</p>
-                        </div>
-                    </div>
+            <div class="mx-auto w-full max-w-xs -rotate-2 transition-transform duration-300 hover:rotate-0 md:max-w-60 lg:max-w-xs">
+                <div class="relative overflow-hidden rounded-r-md shadow-[10px_18px_30px_-12px_rgb(29_36_64/0.6)]">
+                    <img src="{{ asset('images/copertina.webp') }}"
+                        alt="Copertina di “Gli ultimi giorni del trio Meraviglia” di Ivan Scarabocchio, edizioni Edikit"
+                        width="1148" height="1600" class="w-full" loading="lazy">
                     <div aria-hidden="true" class="absolute inset-y-0 left-0 w-3 bg-linear-to-r from-black/35 to-transparent">
                     </div>
                 </div>
@@ -78,19 +68,24 @@
             <div>
                 <p class="font-hand text-pennarello -rotate-1 text-2xl">Fresco di stampa</p>
                 <h2 id="titolo-libro" class="font-hand mt-2 text-5xl leading-none md:text-6xl">
-                    Le cose che restano a galla
+                    Gli ultimi giorni del trio Meraviglia
                 </h2>
 
                 <p class="mt-6 text-lg leading-relaxed">
-                    Un paese di mare, un'estate che non vuole finire e una manciata di personaggi che hanno
-                    tutti qualcosa da nascondere. Un romanzo che fa sorridere e poi, quando meno te lo aspetti,
-                    ti lascia lì a pensarci su.
+                    Incastrato nelle lamiere, Musone è l'unico sopravvissuto del “Trio Meraviglia”. Con le gambe
+                    spezzate, braccato da belve feroci e vegliato dai cadaveri dei compagni, inizia una disperata e
+                    cruda lotta per restare in vita. Un viaggio viscerale e spietato ai limiti estremi della natura
+                    umana. Fino a che punto si può spingere un uomo prima di perdere il senno?
                 </p>
 
-                <dl class="text-matita mt-6 grid grid-cols-3 gap-4 border-y-2 border-dashed border-inchiostro/25 py-4 text-sm">
+                <dl class="text-matita mt-6 flex flex-wrap gap-x-10 gap-y-4 border-y-2 border-dashed border-inchiostro/25 py-4 text-sm">
+                    <div>
+                        <dt class="font-hand text-inchiostro text-xl">Autore</dt>
+                        <dd>Ivan Scarabocchio</dd>
+                    </div>
                     <div>
                         <dt class="font-hand text-inchiostro text-xl">Editore</dt>
-                        <dd>Casa Editrice</dd>
+                        <dd>Edikit</dd>
                     </div>
                     <div>
                         <dt class="font-hand text-inchiostro text-xl">Anno</dt>
@@ -98,7 +93,7 @@
                     </div>
                     <div>
                         <dt class="font-hand text-inchiostro text-xl">Pagine</dt>
-                        <dd>224</dd>
+                        <dd>236</dd>
                     </div>
                 </dl>
 
@@ -106,7 +101,7 @@
                 <ul class="mt-4 flex flex-wrap gap-4">
                     <li>
                         <a href="#" class="bottone bg-postit-giallo" target="_blank" rel="noopener noreferrer">
-                            Casa editrice <span class="sr-only">(si apre in una nuova scheda)</span>
+                            Edikit <span class="sr-only">(si apre in una nuova scheda)</span>
                         </a>
                     </li>
                     <li>
