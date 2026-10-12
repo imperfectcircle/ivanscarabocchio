@@ -57,7 +57,17 @@ Biografia, libri (con link di acquisto multipli e ordinabili), racconti (integra
 
 ## 2. Stato attuale e convenzioni frontend
 
-Il progetto è stato creato con `laravel new`; il pannello di amministrazione, Inertia, React, Wayfinder, TypeScript e Fortify vanno ancora configurati. Prima di aggiungere qualsiasi pacchetto, seguire la regola della sezione 12 (segnalare e chiedere approvazione).
+Il progetto è stato creato con `laravel new`. Prima di aggiungere qualsiasi pacchetto, seguire la regola della sezione 12 (segnalare e chiedere approvazione).
+
+**Pacchetti installati per il pannello**: `inertiajs/inertia-laravel` 2.x, `laravel/fortify` 1.x, `laravel/wayfinder` 0.1.x; lato npm `@inertiajs/react` 2.x, React 19, TypeScript 5, `@vitejs/plugin-react`, `@laravel/vite-plugin-wayfinder`. Il pannello va mantenuto su **Inertia 2** (non aggiornare alla 3 senza approvazione). Su Windows, con `composer require` usare `~` invece di `^` nei vincoli di versione (`composer.bat` elimina il carattere `^`).
+
+**Struttura frontend**:
+- Parte pubblica: `resources/css/app.css` + `resources/js/app.js` (JS semplice, nessun React), viste Blade in `resources/views`.
+- Pannello: entry `resources/js/admin.tsx` + `resources/css/admin.css`; pagine Inertia in `resources/js/pages/`, componenti condivisi in `resources/js/components/`, layout in `resources/js/layouts/`; shell Blade `resources/views/app.blade.php` (con `noindex`). Alias `@/` → `resources/js/`.
+- I due fogli Tailwind usano `source(none)` con `@source` espliciti, in modo che le classi del pannello non finiscano nel CSS pubblico e viceversa. Le nuove cartelle del pannello vanno aggiunte a `@source` in `admin.css`.
+- Wayfinder genera `resources/js/actions`, `resources/js/routes` e `resources/js/wayfinder` (file generati, in `.gitignore`) a ogni build/dev. Verifica dei tipi: `npx tsc --noEmit`.
+
+**Fortify**: registrazione disattivata; attivi reset password, aggiornamento profilo e password, 2FA TOTP (con conferma) e **passkey** (WebAuthn). Le viste di login, 2FA e reset vanno ancora collegate a pagine Inertia (`Fortify::loginView()` ecc. in `FortifyServiceProvider`): fino ad allora `GET /login` non ha una pagina.
 
 - Tutto il codice frontend React va scritto in TypeScript (`.tsx`/`.ts`, mai `.jsx`/`.js`), con tipizzazione esplicita di props, stato e dati ricevuti da Inertia (evitare `any` salvo casi motivati).
 - Nel pannello usare **Wayfinder** per generare e usare le route lato TypeScript, senza URL scritti a mano.
@@ -66,7 +76,7 @@ Il progetto è stato creato con `laravel new`; il pannello di amministrazione, I
 ## 3. Accesso al pannello (solo su account creati dallo sviluppatore)
 
 - **Nessuna auto-registrazione.** Disattivare la registrazione in Fortify e non esporre alcun link o rotta di registrazione pubblica.
-- Gli account del pannello vengono creati solo dallo sviluppatore, tramite comando artisan dedicato (`admin:create-user`), che **crea direttamente l'utente con una password**. Nessun flusso di invito via email. La password va chiesta con un prompt nascosto (mai come argomento del comando, per non lasciarla nella cronologia della shell) e validata con le regole `Password` di Laravel. Sezione profilo per cambio password e 2FA TOTP.
+- Gli account del pannello vengono creati solo dallo sviluppatore, tramite comando artisan dedicato (`admin:create-user`), che **crea direttamente l'utente con una password**. Nessun flusso di invito via email. La password va chiesta con un prompt nascosto (mai come argomento del comando, per non lasciarla nella cronologia della shell) e validata con le regole `Password` di Laravel. Sezione profilo per cambio password, 2FA TOTP e gestione delle passkey.
 - La pagina di login (Inertia/React) è separata dalla parte pubblica del sito e non è linkata dalle pagine pubbliche.
 - Tutte le rotte del pannello sono accessibili solo a utenti autenticati.
 
@@ -273,6 +283,20 @@ Before relying on a package's API, confirm its installed version:
 
 - Laravel can be deployed using [Laravel Cloud](https://cloud.laravel.com/), which is the fastest way to deploy and scale production Laravel applications.
 
+=== inertia-laravel/core rules ===
+
+# Inertia
+
+- Inertia creates fully client-side rendered SPAs without modern SPA complexity, leveraging existing server-side patterns.
+- Components live in `resources/js/Pages` (unless specified in `vite.config.js`). Use `Inertia::render()` for server-side routing instead of Blade views.
+- ALWAYS use `search-docs` tool for version-specific Inertia documentation and updated code examples.
+
+# Inertia v2
+
+- Use all Inertia features from v1 and v2. Check the documentation before making changes to ensure the correct approach.
+- New features: deferred props, infinite scroll, merging props, polling, prefetching, once props, flash data.
+- When using deferred props, add an empty state with a pulsing or animated skeleton.
+
 === laravel/core rules ===
 
 # Do Things the Laravel Way
@@ -298,6 +322,12 @@ Before relying on a package's API, confirm its installed version:
 - When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
 - Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
 - When creating tests, make use of `php artisan make:test [options] {name}` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
+
+=== wayfinder/core rules ===
+
+# Laravel Wayfinder
+
+Use Wayfinder to generate TypeScript functions for Laravel routes. Import from `@/actions/` (controllers) or `@/routes/` (named routes).
 
 === pint/core rules ===
 

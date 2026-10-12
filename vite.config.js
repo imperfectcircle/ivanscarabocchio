@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { local } from 'laravel-vite-plugin/fonts';
 import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 
 /**
  * Builds the explicit variant list for a self-hosted font in resources/fonts.
@@ -19,7 +21,7 @@ const fontVariants = (filePrefix, variants) =>
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/js/app.js', 'resources/css/admin.css', 'resources/js/admin.tsx'],
             refresh: true,
             fonts: [
                 local('Caveat', {
@@ -50,8 +52,15 @@ export default defineConfig({
                 }),
             ],
         }),
+        react(),
         tailwindcss(),
+        wayfinder({ formVariants: true }),
     ],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],

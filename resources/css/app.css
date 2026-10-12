@@ -1,5 +1,8 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 
+/* Solo la parte pubblica: il pannello React ha il suo foglio (admin.css) */
+@source '../views';
+@source '../js/app.js';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 

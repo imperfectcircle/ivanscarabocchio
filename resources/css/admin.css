@@ -1,0 +1,25 @@
+@import 'tailwindcss' source(none);
+
+@source '../js/admin.tsx';
+@source '../js/pages';
+@source '../js/components';
+@source '../js/layouts';
+@source '../views/app.blade.php';
+
+/* Pannello: font di sistema, palette condivisa con la parte pubblica */
+@theme {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    --color-carta: #f8f2e4;
+    --color-inchiostro: #1d2440;
+    --color-biro: #2647a6;
+    --color-pennarello: #b8322a;
+}
+
+@layer base {
+    :focus-visible {
+        outline: 3px solid var(--color-biro);
+        outline-offset: 2px;
+    }
+}
