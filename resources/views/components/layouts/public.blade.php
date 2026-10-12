@@ -97,7 +97,7 @@
         <div class="text-carta/70 border-carta/15 space-y-1 border-t px-5 py-5 text-center text-sm">
             <p>&copy; {{ now()->year }} Ivan Scarabocchio · Tutti gli scarabocchi riservati</p>
             <p lang="en">
-                Made with <span aria-hidden="true">🈯</span> by
+                Made with <span role="img" aria-label="fingers">🈯</span> by
                 <a href="https://fabioangelici.com" target="_blank" rel="noopener noreferrer"
                     class="decoration-postit-rosa hover:text-postit-giallo underline decoration-wavy underline-offset-4">Fabio
                     Angelici<span class="sr-only" lang="it"> (si apre in una nuova scheda)</span></a>
