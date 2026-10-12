@@ -136,11 +136,9 @@
                     </div>
                     <div>
                         <p class="font-hand text-pennarello text-xl">In vetrina · lettura di 8 minuti</p>
-                        <h3 class="font-hand mt-1 text-4xl leading-none">L'uomo che collezionava temporali</h3>
+                        <h3 class="font-hand mt-1 text-4xl leading-none">Lorem, ipsum dolor.</h3>
                         <p class="mt-4 leading-8 italic">
-                            «Ogni volta che il cielo si faceva scuro, il signor Benassi usciva col suo barattolo di vetro.
-                            In paese ridevano, ma nessuno aveva mai avuto il coraggio di chiedergli cosa ci fosse
-                            dentro…»
+                            «Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe ex vel quasi tempora distinctio recusandae ea sit sed incidunt illo. Soluta beatae quos temporibus illo! Dolorem eligendi facere obcaecati enim.»
                         </p>
                         <ul class="mt-4 flex flex-wrap gap-2 text-sm" aria-label="Argomenti">
                             <li class="bg-postit-azzurro px-2 py-0.5">surreale</li>
@@ -156,13 +154,13 @@
                 <ul class="mt-4 divide-y-2 divide-dashed divide-inchiostro/20">
                     <li class="py-4">
                         <a href="#" class="group block">
-                            <span class="font-hand group-hover:text-biro text-2xl">Il cane che sapeva l'inglese</span>
+                            <span class="font-hand group-hover:text-biro text-2xl">Lorem, ipsum dolor.</span>
                             <span class="text-matita block text-sm">Integrale sul sito · 5 minuti</span>
                         </a>
                     </li>
                     <li class="py-4">
                         <a href="#" class="group block" target="_blank" rel="noopener noreferrer">
-                            <span class="font-hand group-hover:text-biro text-2xl">Ultima corsa per Riccione
+                            <span class="font-hand group-hover:text-biro text-2xl">Lorem, ipsum dolor.
                                 <span aria-hidden="true">↗</span></span>
                             <span class="text-matita block text-sm">Pubblicato nell'antologia “Estati” · estratto
                                 <span class="sr-only">(sito esterno, si apre in una nuova scheda)</span></span>
@@ -170,7 +168,7 @@
                     </li>
                     <li class="py-4">
                         <a href="#" class="group block">
-                            <span class="font-hand group-hover:text-biro text-2xl">Lettera a un frigorifero</span>
+                            <span class="font-hand group-hover:text-biro text-2xl">Lorem, ipsum dolor.</span>
                             <span class="text-matita block text-sm">Integrale sul sito · 3 minuti</span>
                         </a>
                     </li>
@@ -186,9 +184,9 @@
 
         @php
             $articoli = [
-                ['immagine' => 'blog-macchina-scrivere', 'categoria' => 'Scrittura', 'data' => '2026-10-02', 'titolo' => 'Come è nato il libro (e quante volte l\'ho buttato via)', 'estratto' => 'Tre anni, due computer, un quaderno caduto in mare. Il dietro le quinte del mio primo romanzo.', 'rotazione' => '-rotate-1'],
-                ['immagine' => 'blog-scrivania', 'categoria' => 'Novità', 'data' => '2026-09-18', 'titolo' => 'La prima presentazione: com\'è andata', 'estratto' => 'Avevo preparato un discorso. Poi è entrato un bambino con un gelato e ho improvvisato.', 'rotazione' => 'rotate-1'],
-                ['immagine' => 'blog-caffe', 'categoria' => 'Letture', 'data' => '2026-09-01', 'titolo' => 'Cinque libri che mi hanno fatto venire voglia di scrivere', 'estratto' => 'Una lista breve, molto personale e assolutamente non oggettiva.', 'rotazione' => '-rotate-2'],
+                ['immagine' => 'blog-macchina-scrivere', 'categoria' => 'Scrittura', 'data' => '2026-10-02', 'titolo' => 'Lorem ipsum dolor sit amet consectetur adipisicing.', 'estratto' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, minima. Eveniet explicabo alias blanditiis recusandae dignissimos, unde eligendi necessitatibus inventore porro quas soluta deleniti ad incidunt aperiam ipsam placeat quidem.', 'rotazione' => '-rotate-1'],
+                ['immagine' => 'blog-scrivania', 'categoria' => 'Novità', 'data' => '2026-09-18', 'titolo' => 'Lorem, ipsum dolor.', 'estratto' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, aliquam?', 'rotazione' => 'rotate-1'],
+                ['immagine' => 'blog-caffe', 'categoria' => 'Letture', 'data' => '2026-09-01', 'titolo' => 'Lorem, ipsum dolor.', 'estratto' => 'Lorem ipsum dolor sit amet consectetur.', 'rotazione' => '-rotate-2'],
             ];
         @endphp
 
