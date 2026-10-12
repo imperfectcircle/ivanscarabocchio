@@ -76,6 +76,8 @@ Il progetto è stato creato con `laravel new`. Prima di aggiungere qualsiasi pac
 - Regole password (`AppServiceProvider`): minimo 12 caratteri, maiuscole, minuscole e numeri; in produzione anche il controllo `uncompromised()`.
 - `php artisan admin:create-user`: chiede nome, email e password (campo nascosto, con conferma) e valida tutto prima di creare l'utente.
 
+**Lingua**: `APP_LOCALE=it` (fallback `en`). Le traduzioni di validazione, autenticazione, password ed email stanno in `lang/it` e `lang/it.json`, generate con `laravel-lang/common` (dipendenza di sviluppo). Per aggiornarle: `php artisan lang:update`. I testi dell'interfaccia sono scritti direttamente in italiano nelle viste e nei componenti.
+
 - Tutto il codice frontend React va scritto in TypeScript (`.tsx`/`.ts`, mai `.jsx`/`.js`), con tipizzazione esplicita di props, stato e dati ricevuti da Inertia (evitare `any` salvo casi motivati).
 - Nel pannello usare **Wayfinder** per generare e usare le route lato TypeScript, senza URL scritti a mano.
 - Nelle viste Blade della parte pubblica usare le route con nome (`route()`).
@@ -216,7 +218,6 @@ Da chiarire con l'utente prima di implementare le parti interessate:
 3. **Logo**: valutare una firma o uno scarabocchio disegnato a mano dall'autore, digitalizzato in SVG, da usare come logo.
 4. **Libreria di sanitizzazione HTML** per l'editor Tiptap (da proporre al momento dell'implementazione).
 5. **Dominio definitivo** (da acquistare; per ora ivan.fabioangelici.com).
-6. **Messaggi in italiano**: `APP_LOCALE` è ancora `en`, quindi errori di validazione, messaggi di Fortify ed email di reset password sono in inglese. Da decidere: file `lang/it` scritti a mano oppure il pacchetto `laravel-lang/lang` (dipendenza da approvare).
 
 <laravel-boost-guidelines>
 === foundation rules ===
@@ -291,13 +292,24 @@ Before relying on a package's API, confirm its installed version:
 
 - Laravel can be deployed using [Laravel Cloud](https://cloud.laravel.com/), which is the fastest way to deploy and scale production Laravel applications.
 
+=== tests rules ===
+
+# Test Enforcement
+
+- Add or update tests for behavior and logic changes when a test provides meaningful regression coverage.
+- Pure copy, styling, and layout-only changes do not require new or updated tests.
+- When test coverage applies, run the affected tests and ensure they pass.
+- Test the changed behavior and its important failure modes, but do not add tests beyond them.
+- Read the `testing-best-practices` skill before writing tests.
+
 === inertia-laravel/core rules ===
 
 # Inertia
 
 - Inertia creates fully client-side rendered SPAs without modern SPA complexity, leveraging existing server-side patterns.
-- Components live in `resources/js/Pages` (unless specified in `vite.config.js`). Use `Inertia::render()` for server-side routing instead of Blade views.
+- Components live in `resources/js/pages` (unless specified in `vite.config.js`). Use `Inertia::render()` for server-side routing instead of Blade views.
 - ALWAYS use `search-docs` tool for version-specific Inertia documentation and updated code examples.
+- IMPORTANT: Activate `inertia-react-development` when working with Inertia client-side patterns.
 
 # Inertia v2
 
@@ -359,5 +371,11 @@ Use Wayfinder to generate TypeScript functions for Laravel routes. Import from `
 - Rerun a test after each change to it.
 - Run `vendor/bin/pest` to call the test runner directly. It accepts the same file path and `--filter=testName` arguments.
 - After the feature tests pass, ask the user to run the complete suite with `php artisan test --compact`.
+
+=== inertia-react/core rules ===
+
+# Inertia + React
+
+- IMPORTANT: Activate `inertia-react-development` when working with Inertia React client-side patterns.
 
 </laravel-boost-guidelines>

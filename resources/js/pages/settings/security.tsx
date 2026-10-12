@@ -51,7 +51,7 @@ function SettingsCard({ id, title, description, children }: { id: string; title:
 
 function PasswordSection() {
     return (
-        <SettingsCard id="password" title="Password" description="Usa una password lunga e diversa da quelle degli altri siti.">
+        <SettingsCard id="sezione-password" title="Password" description="Usa una password lunga e diversa da quelle degli altri siti.">
             <Form
                 action={userPasswordUpdate()}
                 errorBag="updatePassword"
@@ -111,7 +111,7 @@ function TwoFactorSection({ twoFactor, recoveryCodes }: { twoFactor: TwoFactorSt
 
     return (
         <SettingsCard
-            id="due-passaggi"
+            id="sezione-due-passaggi"
             title="Verifica in due passaggi"
             description="Oltre alla password, all'accesso viene chiesto un codice generato da un'app (es. Google Authenticator, 1Password)."
         >
@@ -237,7 +237,7 @@ function PasskeysSection({ passkeys }: { passkeys: PasskeySummary[] }) {
 
     return (
         <SettingsCard
-            id="passkey"
+            id="sezione-passkey"
             title="Passkey"
             description="Accedi senza password usando l'impronta, il volto o il PIN del tuo dispositivo."
         >

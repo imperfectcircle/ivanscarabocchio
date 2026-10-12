@@ -33,7 +33,7 @@ export default function AdminLayout({ title, children }: AdminLayoutProps) {
             <div className="min-h-screen bg-slate-50 font-sans text-inchiostro">
                 <header className="bg-inchiostro text-white">
                     <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-3">
-                        <Link href={dashboard()} className="text-lg font-bold">
+                        <Link href={dashboard()} className="inline-flex min-h-11 items-center text-lg font-bold">
                             Scarabocchio <span className="font-normal text-carta/80">· Pannello</span>
                         </Link>
 
