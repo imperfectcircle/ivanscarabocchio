@@ -8,10 +8,10 @@
 
                 <h1 id="titolo-benvenuto" class="font-hand mt-4 text-6xl leading-[0.95] sm:text-7xl lg:text-8xl">
                     Sono Ivan,
-                    <span class="relative inline-block whitespace-nowrap">
+                    <span class="relative mr-5 inline-block whitespace-nowrap pr-1">
                         scrivo storie
                         <x-doodle.circle animated
-                            class="text-pennarello pointer-events-none absolute -inset-x-4 -inset-y-3 h-[calc(100%+1.5rem)] w-[calc(100%+2rem)]" />
+                            class="text-pennarello pointer-events-none absolute -top-3 -left-5 h-[calc(100%+1.5rem)] w-[calc(100%+3rem)]" />
                     </span>
                     e ogni tanto scarabocchio.
                 </h1>
@@ -30,16 +30,19 @@
             <div class="relative mx-auto w-full max-w-sm">
                 <figure class="nastro bg-foglio rotate-3 p-3 pb-4 shadow-[4px_14px_24px_-10px_rgb(29_36_64/0.45)]">
                     <img src="{{ asset('images/segnaposto/autore.webp') }}" alt="Ritratto di Ivan Scarabocchio"
-                        width="900" height="1100" class="aspect-[9/11] w-full object-cover grayscale-[30%]"
+                        width="900" height="1100" class="aspect-9/11 w-full object-cover grayscale-30"
                         fetchpriority="high">
                     <figcaption class="font-hand mt-3 text-center text-2xl">io, con la faccia da scrittore</figcaption>
                 </figure>
 
                 <x-post-it color="rosa"
-                    class="font-hand absolute -bottom-10 -left-8 w-44 -rotate-6 text-center text-2xl leading-tight sm:-left-14">
+                    class="font-hand absolute -top-8 -left-2 w-40 -rotate-6 text-center text-2xl leading-tight sm:-left-16">
                     È uscito il mio primo libro!
                 </x-post-it>
-                <x-doodle.arrow class="text-inchiostro absolute -bottom-24 left-24 hidden h-16 w-20 rotate-12 sm:block" />
+                <a href="#libro" class="font-hand hover:text-biro absolute -bottom-20 -left-2 hidden items-end gap-1 text-2xl sm:flex">
+                    <span class="-rotate-3">eccolo qui sotto</span>
+                    <x-doodle.arrow class="h-14 w-16 translate-y-6" />
+                </a>
             </div>
         </div>
     </section>
@@ -47,27 +50,27 @@
     {{-- Il libro --}}
     <section id="libro" aria-labelledby="titolo-libro" class="bg-carta-scura relative">
         <svg viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"
-            class="text-carta-scura absolute -top-[39px] left-0 h-10 w-full">
+            class="text-carta-scura absolute -top-9.75 left-0 h-10 w-full">
             <path d="M0 40 C 240 0, 480 30, 720 14 S 1200 4, 1440 26 L 1440 40 Z" fill="currentColor" />
         </svg>
 
         <div class="mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-[1fr_1.3fr] md:py-24">
             {{-- Copertina segnaposto --}}
-            <div class="mx-auto w-full max-w-xs -rotate-2 transition-transform duration-300 hover:rotate-0">
+            <div class="mx-auto w-full max-w-xs -rotate-2 md:max-w-60 lg:max-w-xs transition-transform duration-300 hover:rotate-0">
                 <div
-                    class="relative aspect-[2/3] overflow-hidden rounded-r-md shadow-[10px_18px_30px_-12px_rgb(29_36_64/0.6)]">
+                    class="relative aspect-2/3 overflow-hidden rounded-r-md shadow-[10px_18px_30px_-12px_rgb(29_36_64/0.6)]">
                     <img src="{{ asset('images/segnaposto/copertina-sfondo.webp') }}"
                         alt="Copertina del libro “Le cose che restano a galla”" width="700" height="1000"
                         class="absolute inset-0 h-full w-full object-cover" loading="lazy">
                     <div aria-hidden="true"
-                        class="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-black/40 via-transparent to-black/60 p-6 text-white">
+                        class="absolute inset-0 flex flex-col justify-between bg-linear-to-b from-black/40 via-transparent to-black/60 p-6 text-white">
                         <p class="text-sm tracking-[0.3em] uppercase">Ivan Scarabocchio</p>
                         <div>
                             <p class="font-hand text-5xl leading-none">Le cose che restano a galla</p>
                             <p class="mt-3 text-xs tracking-widest uppercase">Casa Editrice</p>
                         </div>
                     </div>
-                    <div aria-hidden="true" class="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/35 to-transparent">
+                    <div aria-hidden="true" class="absolute inset-y-0 left-0 w-3 bg-linear-to-r from-black/35 to-transparent">
                     </div>
                 </div>
             </div>
@@ -125,7 +128,7 @@
     </section>
 
     {{-- Racconti --}}
-    <section id="racconti" aria-labelledby="titolo-racconti" class="mx-auto max-w-6xl px-5 py-20 md:py-28">
+    <section id="racconti" aria-labelledby="titolo-racconti" class="mx-auto max-w-6xl px-5 pt-20 pb-10 md:pt-28 md:pb-12">
         <x-section-heading id="titolo-racconti" title="Racconti" kicker="Storie brevi, da leggere col caffè"
             link="#" link-label="Tutti i racconti" />
 
@@ -199,7 +202,7 @@
                 <article
                     class="nastro bg-foglio {{ $articolo['rotazione'] }} group flex flex-col p-4 pb-6 shadow-[3px_10px_20px_-10px_rgb(29_36_64/0.45)] transition-transform hover:rotate-0">
                     <img src="{{ asset('images/segnaposto/' . $articolo['immagine'] . '.webp') }}" alt=""
-                        width="900" height="600" class="aspect-[3/2] w-full object-cover" loading="lazy">
+                        width="900" height="600" class="aspect-3/2 w-full object-cover" loading="lazy">
                     <p class="text-matita mt-4 flex items-center gap-2 text-sm">
                         <span class="bg-postit-giallo font-hand text-inchiostro px-2 text-lg">{{ $articolo['categoria'] }}</span>
                         <time datetime="{{ $articolo['data'] }}">
