@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Inertia\Response;
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
 
@@ -35,6 +37,8 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
         Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
 
+        $this->registerInertiaViews();
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
@@ -52,5 +56,28 @@ class FortifyServiceProvider extends ServiceProvider
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
         });
+    }
+
+    /**
+     * Render the Fortify authentication screens as Inertia pages.
+     */
+    private function registerInertiaViews(): void
+    {
+        Fortify::loginView(fn (Request $request): Response => Inertia::render('auth/login', [
+            'status' => $request->session()->get('status'),
+        ]));
+
+        Fortify::twoFactorChallengeView(fn (): Response => Inertia::render('auth/two-factor-challenge'));
+
+        Fortify::requestPasswordResetLinkView(fn (Request $request): Response => Inertia::render('auth/forgot-password', [
+            'status' => $request->session()->get('status'),
+        ]));
+
+        Fortify::resetPasswordView(fn (Request $request): Response => Inertia::render('auth/reset-password', [
+            'email' => $request->string('email')->toString(),
+            'token' => $request->route('token'),
+        ]));
+
+        Fortify::confirmPasswordView(fn (): Response => Inertia::render('auth/confirm-password'));
     }
 }

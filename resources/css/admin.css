@@ -4,6 +4,7 @@
 @source '../js/pages';
 @source '../js/components';
 @source '../js/layouts';
+@source '../js/lib';
 @source '../views/app.blade.php';
 
 /* Pannello: font di sistema, palette condivisa con la parte pubblica */

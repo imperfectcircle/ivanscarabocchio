@@ -67,7 +67,14 @@ Il progetto è stato creato con `laravel new`. Prima di aggiungere qualsiasi pac
 - I due fogli Tailwind usano `source(none)` con `@source` espliciti, in modo che le classi del pannello non finiscano nel CSS pubblico e viceversa. Le nuove cartelle del pannello vanno aggiunte a `@source` in `admin.css`.
 - Wayfinder genera `resources/js/actions`, `resources/js/routes` e `resources/js/wayfinder` (file generati, in `.gitignore`) a ogni build/dev. Verifica dei tipi: `npx tsc --noEmit`.
 
-**Fortify**: registrazione disattivata; attivi reset password, aggiornamento profilo e password, 2FA TOTP (con conferma) e **passkey** (WebAuthn). Le viste di login, 2FA e reset vanno ancora collegate a pagine Inertia (`Fortify::loginView()` ecc. in `FortifyServiceProvider`): fino ad allora `GET /login` non ha una pagina.
+**Fortify**: registrazione disattivata; attivi reset password, aggiornamento profilo e password, 2FA TOTP (con conferma) e **passkey** (WebAuthn, client `@laravel/passkeys`). Prefisso `admin`: login `/admin/login`, pannello `/admin` (`fortify.home`), dopo il logout si torna a `/admin/login`. Le schermate di Fortify sono pagine Inertia registrate in `FortifyServiceProvider::registerInertiaViews()` (`auth/login`, `auth/two-factor-challenge`, `auth/forgot-password`, `auth/reset-password`, `auth/confirm-password`).
+
+**Pannello (stato attuale)**:
+- Rotte in `routes/web.php`, gruppo `admin.` con middleware `auth`: `admin.dashboard` (`/admin`) e `admin.security` (`/admin/sicurezza`, protetta anche da `password.confirm`), con cambio password, 2FA (QR come data URI, codici di recupero solo su richiesta tramite prop `optional`) e passkey.
+- Componenti condivisi: `components/form-field`, `button`, `status-message` (regione live), `text-link`; layout `layouts/admin-layout` e `layouts/auth-layout`; traduzioni degli stati flash in `lib/status-messages.ts`.
+- Props condivise (`HandleInertiaRequests`): `auth.user` (solo id, nome, email) e `flash.status`. Tipi in `resources/js/types`.
+- Regole password (`AppServiceProvider`): minimo 12 caratteri, maiuscole, minuscole e numeri; in produzione anche il controllo `uncompromised()`.
+- `php artisan admin:create-user`: chiede nome, email e password (campo nascosto, con conferma) e valida tutto prima di creare l'utente.
 
 - Tutto il codice frontend React va scritto in TypeScript (`.tsx`/`.ts`, mai `.jsx`/`.js`), con tipizzazione esplicita di props, stato e dati ricevuti da Inertia (evitare `any` salvo casi motivati).
 - Nel pannello usare **Wayfinder** per generare e usare le route lato TypeScript, senza URL scritti a mano.
@@ -209,6 +216,7 @@ Da chiarire con l'utente prima di implementare le parti interessate:
 3. **Logo**: valutare una firma o uno scarabocchio disegnato a mano dall'autore, digitalizzato in SVG, da usare come logo.
 4. **Libreria di sanitizzazione HTML** per l'editor Tiptap (da proporre al momento dell'implementazione).
 5. **Dominio definitivo** (da acquistare; per ora ivan.fabioangelici.com).
+6. **Messaggi in italiano**: `APP_LOCALE` è ancora `en`, quindi errori di validazione, messaggi di Fortify ed email di reset password sono in inglese. Da decidere: file `lang/it` scritti a mano oppure il pacchetto `laravel-lang/lang` (dipendenza da approvare).
 
 <laravel-boost-guidelines>
 === foundation rules ===
